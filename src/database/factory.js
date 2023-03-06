@@ -10,3 +10,5 @@ async function factory(sql){
         console.log(error)
     }
 }
+
+module.exports = factory;

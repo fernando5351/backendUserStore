@@ -7,7 +7,7 @@ class UserService {
   constructor() { };
 
   create(data) {
-    const { name, lastname, age, user, direction, email, password } = data;
+    const { name, lastname, age, direction, email, password } = data;
     return new Promise((resolve, reject) => {
       let sql = `SELECT email FROM users WHERE email = "${email}"`;
       connection.query(sql, async (err, results) => {
@@ -15,21 +15,20 @@ class UserService {
           reject(boom.badImplementation("Error al crear usuario"));
         } else if (results.length == 0) {
           const passHash = await bcryptjs.hash(password, 8);
-          const query = `INSERT INTO users(name, lastname, user, direction, password, email, age) VALUES ("${name}","${lastname}","${user}","${direction}","${passHash}","${email}","${age}")`;
+          const query = `INSERT INTO users(name, lastname, direction, password, email, age) VALUES ("${name}","${lastname}","${direction}","${passHash}","${email}","${age}")`;
           const newUser = await factory(query);
           if (newUser) {
             var userDetails = {
               name: name,
               lastname: lastname,
               age: age,
-              user: user,
               direction: direction,
               email: email
             }
           }
           resolve(userDetails);
         } else {
-          reject(boom.badRequest("Email en uso"));
+          reject(boom.conflict("Email en uso"));
         }
       });
     });

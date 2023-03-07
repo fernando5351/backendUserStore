@@ -8,7 +8,7 @@ const Pastel = require("./pastelRouter");
 const Size = require("./sizeRouter.js")
 
 function routerApi(app){
-    //http://localhost:9000/api/v1/decoration
+    //http://localhost:9000/api/v1/pastel
     app.use('/api/v1', router);
     router.use('/users', User);
     router.use('/colors', Color);

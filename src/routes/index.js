@@ -5,10 +5,11 @@ const Color = require("./colorRouter");
 const Decoration = require("./decorationRouter");
 const Flavor = require("./flavorRouter");
 const Pastel = require("./pastelRouter");
-const Size = require("./sizeRouter.js")
+const Size = require("./sizeRouter")
+const Shopping = require("./shoppingRouter.js")
 
 function routerApi(app){
-    //http://localhost:9000/api/v1/pastel
+    //http://localhost:9000/api/v1/shopping
     app.use('/api/v1', router);
     router.use('/users', User);
     router.use('/colors', Color);
@@ -16,6 +17,7 @@ function routerApi(app){
     router.use('/flavor', Flavor);
     router.use('/pastel', Pastel);
     router.use('/size', Size);
+    router.use('/shopping', Shopping);
 }
 
 module.exports = routerApi;

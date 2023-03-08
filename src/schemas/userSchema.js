@@ -7,6 +7,7 @@ const age = joi.number();
 const direction = joi.string();
 const email = joi.string().email();
 const password = joi.string();
+const cellphone = joi.string();
 
 const createUserSchema = joi.object({
     name: name.required(),
@@ -15,6 +16,7 @@ const createUserSchema = joi.object({
     direction: direction.required(),
     email: email.required(),
     password: password.required(),
+    cellphone: cellphone.required()
 });
 
 const updateUserSchema = joi.object({

@@ -18,7 +18,7 @@ class Shopping{
 
     async getShopping(id){
         const query = `
-        SELECT color1.nameColor AS color1,
+        SELECT pedidos.id, color1.nameColor AS color1,
         color2.nameColor AS color2,
         pastel.namePastel,
         flavor1.nameFlavor AS flavor1,

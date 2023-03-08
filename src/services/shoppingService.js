@@ -43,28 +43,28 @@ class Shopping{
         }
     }
 
+    async shopping(data) {
+        try {
+          const promises = data.map(async (id) => {
+            const query = `UPDATE pedidos SET estado = 0 WHERE id = ${id}`;
+            const res = await factory(query);
+            return res;
+          });
+      
+          const results = await Promise.all(promises);
+          return results;
+        } catch (error) {
+          console.log(error);
+        }
+      }
+      
+
+    async delShop(id){
+        const query = `DELETE FROM pedidos WHERE id=${id}`;
+        const res = await factory(query);
+        return res
+    }
+
 }
 
 module.exports = Shopping;
-
-
-
-        // SELECT color1.nameColor AS color1,
-        // color2.nameColor AS color2,
-        // flavor.namePastel,
-        // flavor.nameFlavor AS flavor_name1,
-        // flavor.nameFlavor AS flavor_name2,
-        // decoration.nameDecoration AS decoration_name,
-        // size.nameSize,
-        // size.sizeDescription,
-        // pastel.price,
-        // pedidos.cant
-        // FROM pedidos
-        // INNER JOIN color AS color1 ON pedidos.idColor1 = color1.id
-        // INNER JOIN color AS color2 ON pedidos.idColor2 = color2.id
-        // INNER JOIN flavor ON pedidos.idFlavor1 = flavor.id
-        // INNER JOIN flavor ON pedidos.idFlavor2 = flavor.id
-        // INNER JOIN decoration ON pedidos.idDecoration = decoration.id
-        // INNER JOIN size ON pedidos.idSize = size.id
-        // INNER JOIN pastel ON pedidos.idPastel = pastel.id
-        // WHERE pedidos.idUser = 10 AND pedidos.estado = 1;

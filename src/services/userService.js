@@ -16,9 +16,11 @@ class UserService {
         } else if (results.length == 0) {
           const passHash = await bcryptjs.hash(password, 8);
           const query = `INSERT INTO users(name, lastname, direction, password, email, age, cellphone) VALUES ("${name}","${lastname}","${direction}","${passHash}","${email}","${age}", "${cellphone}")`;
-          const newUser = await factory(query);
-          if (newUser) {
+          const result = await factory(query);
+          console.log(result);
+          if (result) {
             var userDetails = {
+              id: result.insertId,
               name: name,
               lastname: lastname,
               age: age,

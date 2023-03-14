@@ -6,8 +6,8 @@ class Shopping{
     constructor(){}
 
     async create(data){
-        const { idPastel, idFlavor1, idFlavor2, idDecoration, idUser, idColor1, idColor2 } = data;
-        const query = `INSERT INTO pedidos (idPastel, idFlavor1, idFlavor2, idDecoration, idUser, estado, idColor1, idColor2) VALUES ("${idPastel}", "${idFlavor1}", "${idFlavor2}", "${idDecoration}", "${idUser}", "1","${idColor1}","${idColor2}");`;
+        const { idPastel, idFlavor,  idDecoration, idUser, idColor1, idColor2 } = data;
+        const query = `INSERT INTO pedidos (idPastel, idFlavor, idDecoration, idUser, estado, idColor1, idColor2) VALUES ("${idPastel}", "${idFlavor}", "${idDecoration}", "${idUser}", "1","${idColor1}","${idColor2}");`;
         try {
             const res = await factory(query);
             return res;
@@ -41,6 +41,13 @@ class Shopping{
         } catch (error) {
             console.log(error);
         }
+    }
+
+    async getShop(id){
+        const query = `
+        SELECT pedidos.id, pedidos.idPastel, pastel.imgurl, pedidos.idUser, pastel.price, pastel.namePastel FROM pastel, pedidos
+        WHERE pedidos.id = pedidos.idPastel &&  pedidos.idUser = ${id} && pedidos.estado = 1
+        `
     }
 
     async shopping(data) {

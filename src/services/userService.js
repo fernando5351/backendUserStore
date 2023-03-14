@@ -56,7 +56,7 @@ class UserService {
     });
   }
 
-  getUser(id) {
+  getUser(id){
     return new Promise(async (resolve, reject) => {
       console.log(id);
       const sql = `SELECT * FROM users WHERE id="${id}"`;

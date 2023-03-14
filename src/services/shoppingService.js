@@ -18,7 +18,8 @@ class Shopping{
 
     async getShopping(id){
         const query = `
-        SELECT pedidos.id, color1.nameColor AS color1,
+        SELECT pedidos.id, 
+        color1.nameColor AS color1,
         color2.nameColor AS color2,
         pastel.namePastel,
         flavor.nameFlavor AS flavor,
@@ -28,11 +29,12 @@ class Shopping{
         pedidos.cant
         FROM pedidos
         INNER JOIN color AS color1 ON pedidos.idColor1 = color1.id
-        INNER JOIN color AS color2 ON pedidos.idColor2 = color2.id
-        INNER JOIN flavor AS flavor ON pedidos.idFlavor = flavor.id
+        LEFT JOIN color AS color2 ON pedidos.idColor2 = color2.id
+        INNER JOIN flavor ON pedidos.idFlavor = flavor.id
         INNER JOIN decoration ON pedidos.idDecoration = decoration.id
         INNER JOIN pastel ON pedidos.idPastel = pastel.id
-        WHERE pedidos.idUser = ${id} AND pedidos.estado = 1;`;
+        WHERE pedidos.idUser = ${id} AND pedidos.estado = 1
+        ;`;
         const res = await factory(query);
         try {
             return res

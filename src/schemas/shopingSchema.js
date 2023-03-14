@@ -11,7 +11,7 @@ const idColor2 = Joi.number();
 
 const createShoppingSchema = Joi.object({
     idPastel: idPastel.required(),
-    idFlavor: idFlavor1.required(),
+    idFlavor: idFlavor.required(),
     idDecoration: idDecoration.required(),
     idUser: idUser.required(),
     idColor1: idColor1.required(),

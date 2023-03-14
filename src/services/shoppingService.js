@@ -21,8 +21,7 @@ class Shopping{
         SELECT pedidos.id, color1.nameColor AS color1,
         color2.nameColor AS color2,
         pastel.namePastel,
-        flavor1.nameFlavor AS flavor1,
-        flavor2.nameFlavor AS flavor2,
+        flavor.nameFlavor AS flavor,
         decoration.nameDecoration AS decoration_name,
         pastel.imgurl,
         pastel.price,
@@ -30,8 +29,7 @@ class Shopping{
         FROM pedidos
         INNER JOIN color AS color1 ON pedidos.idColor1 = color1.id
         INNER JOIN color AS color2 ON pedidos.idColor2 = color2.id
-        INNER JOIN flavor AS flavor1 ON pedidos.idFlavor1 = flavor1.id
-        INNER JOIN flavor AS flavor2 ON pedidos.idFlavor2 = flavor2.id
+        INNER JOIN flavor AS flavor ON pedidos.idFlavor = flavor.id
         INNER JOIN decoration ON pedidos.idDecoration = decoration.id
         INNER JOIN pastel ON pedidos.idPastel = pastel.id
         WHERE pedidos.idUser = ${id} AND pedidos.estado = 1;`;
